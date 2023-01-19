@@ -23,6 +23,15 @@ class MonthData { // сбор статистики и подсчёт данны�
         }
         return maxSteps;
     }
+    int averageStepsInMonth() {            // ДОБАВЛЕНО 19.01.23 - нахождение среднего дневного значения пройденных шагов за месяц
+        int averageSteps = 0;
+        int temp = 0;
+        for (int i = 0; i < 30; i++) {
+            temp = temp + days[i];
+        }
+        averageSteps = (temp / 30);
+        return averageSteps;
+    }
     int bestSeries(int goalByStepsPerDay) {  // нахождение лучшей серии из нескольких дней подряд по превышению норматива и возврат значения
         int bestSession = 0;
         int countBest = 0;
