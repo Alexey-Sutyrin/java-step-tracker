@@ -12,10 +12,10 @@ class StepTracker {  // основная логика проекта - в дан
         }
     }
     void addNewNumberStepsPerDay () { // метод - занесение кол-ва пройденных шагов в ячейку - Пункт 1 Меню
-        System.out.println("Введите номер месяца от 0 - январь до 11 - декабрь.");
+        System.out.println("Введите номер месяца от 1 - январь до 12 - декабрь."); // 30.05.23 - диапазон 0-11 заменен на 1-12
         int monthNumber = scanner.nextInt();
-        if (monthNumber < 0 || monthNumber > 11) { // ДОБАВЛЕНО 19.01.23 - сложные условия формата AND,OR у нас почему-то во 2 спринт передвинуты,в "Арифметические действия" но если в замечаниях разрешили - с удовольствием добавлю, так короче)
-            System.out.println("Номер месяца неверен - он должен быть в пределах от 0 до 11!");
+        if (monthNumber < 1 || monthNumber > 12) { // ДОБАВЛЕНО 19.01.23 - сложные условия формата AND,OR у нас во 2 спринте, но в замечаниях разрешили - с удовольствием добавлю
+            System.out.println("Номер месяца неверен - он должен быть в пределах от 1 до 12!"); // 30.05.23 - диапазон 0-11 заменен на 1-12
             return;
         }
         System.out.println("Введите номер дня в месяце от 1 до 30 (включительно).");
@@ -30,7 +30,7 @@ class StepTracker {  // основная логика проекта - в дан
             System.out.println("Количество пройденных шагов некорректно - оно должно быть больше 0!");
             return;
         }
-        MonthData monthData = monthToData[monthNumber];
+        MonthData monthData = monthToData[monthNumber-1];
         monthData.days[dayNumber-1] = stepsCount;
         System.out.println ("Изменения внесены успешно!" + " Месяц " + monthNumber +  " День " + dayNumber + " = " + stepsCount + " шагов");
     }
@@ -47,14 +47,15 @@ class StepTracker {  // основная логика проекта - в дан
         }
     }
     void printStatistic() {     // вывод общей статистики - Пункт 2 Меню
-        System.out.println("Введите номер месяца от 0 - январь до 11 - декабрь."); // ввод и проверка номера месяца
+                                // ДОБАВЛЕНО 30.05.23 - диапазон вводимых месяцев 0-11 изменён на 1-12
+        System.out.println("Введите номер месяца от 1 - январь до 12 - декабрь."); // ввод и проверка номера месяца
         int monthNumber = scanner.nextInt();
-        if (monthNumber < 0 || monthNumber > 11) { // ДОБАВЛЕНО 19.01.23 - аналогично addNewNumberStepsPerDay
-            System.out.println("Номер месяца неверен - он должен быть в пределах от 0 до 11!");
+        if (monthNumber < 1 || monthNumber > 12) { // ДОБАВЛЕНО 19.01.23 - аналогично addNewNumberStepsPerDay
+            System.out.println("Номер месяца неверен - он должен быть в пределах от 1 до 12!");
             return;
         }
         MonthData oldMonthData = new MonthData(); // получение соответствующего месяца
-        oldMonthData = monthToData[monthNumber];    // получение соответствующего месяца
+        oldMonthData = monthToData[monthNumber-1];    // получение соответствующего месяца, 30.05.23 - коррекция на 1
         int summa = oldMonthData.sumStepsFromMonth();  // получение суммы шагов за месяц
         System.out.println("Вывод общей статистики : "); // вывод общей статистики
         oldMonthData.printDaysAndStepsFromMonth();      // вывод общей статистики
