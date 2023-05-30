@@ -35,10 +35,10 @@ class MonthData { // сбор статистики и подсчёт данны�
     int bestSeries(int goalByStepsPerDay) {  // нахождение лучшей серии из нескольких дней подряд по превышению норматива и возврат значения
         int bestSession = 0;
         int countBest = 0;
-        for (int i = 0; i < 30; i++) {
-            if (days[i] > goalByStepsPerDay) {
+        for (int i = 0; i < days.length; i++) {
+            if (days[i] >= goalByStepsPerDay) {
                 bestSession = bestSession + 1;
-                if (countBest < bestSession) {
+                if (bestSession >= countBest) {
                     countBest = bestSession;
                 }
             } else {
